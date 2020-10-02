@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000; 
-const db = require('./db/database'); 
+const { db } = require('./db/index'); 
 
 
 //creating our app
@@ -39,7 +39,8 @@ app.use((err, req, res, next) => {
 //     console.log(`Your server, listening on port ${port}`);
 //   });
 
-  db.sync()  // sync our database
+//syncing the database
+db.sync()
   .then(function(){
     app.listen(port) // then start listening with our express server once we have synced
   })
